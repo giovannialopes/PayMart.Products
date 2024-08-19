@@ -1,3 +1,5 @@
+using PayMart.Infrastructure.Products.Migrations;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -22,4 +24,13 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+await MigrationDb();
+
 app.Run();
+
+async Task MigrationDb()
+{
+    await using var scope = app.Services.CreateAsyncScope();
+
+    await DataBaseMigration.MigrateDataBase(scope.ServiceProvider);
+}

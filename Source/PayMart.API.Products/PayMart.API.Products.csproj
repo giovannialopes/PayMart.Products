@@ -10,4 +10,10 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PayMart.Application.Products\PayMart.Application.Products.csproj" />
+    <ProjectReference Include="..\PayMart.Domain.Products\PayMart.Domain.Products.csproj" />
+    <ProjectReference Include="..\PayMart.Infrastructure.Products\PayMart.Infrastructure.Products.csproj" />
+  </ItemGroup>
+
 </Project>
