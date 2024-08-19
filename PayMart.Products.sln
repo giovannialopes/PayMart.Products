@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35122.118
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{C4955A6F-31A1-43F6-A64A-51AA94B8C802}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayMart.API.Products", "Source\PayMart.API.Products\PayMart.API.Products.csproj", "{5C9D6ECE-8385-4C13-8FDC-313B33DA06FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayMart.Domain.Products", "Source\PayMart.Domain.Products\PayMart.Domain.Products.csproj", "{A79FE505-49DB-43A6-BDDA-B6EF9027A632}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayMart.Application.Products", "Source\PayMart.Application.Products\PayMart.Application.Products.csproj", "{6C9A1CEE-1FDA-42F2-8BAC-755FAECEA98F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayMart.Infrastructure.Products", "Source\PayMart.Infrastructure.Products\PayMart.Infrastructure.Products.csproj", "{9BF765BB-4B46-4D04-A5A6-F8D2C0323F31}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5C9D6ECE-8385-4C13-8FDC-313B33DA06FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C9D6ECE-8385-4C13-8FDC-313B33DA06FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C9D6ECE-8385-4C13-8FDC-313B33DA06FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C9D6ECE-8385-4C13-8FDC-313B33DA06FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A79FE505-49DB-43A6-BDDA-B6EF9027A632}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A79FE505-49DB-43A6-BDDA-B6EF9027A632}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A79FE505-49DB-43A6-BDDA-B6EF9027A632}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A79FE505-49DB-43A6-BDDA-B6EF9027A632}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C9A1CEE-1FDA-42F2-8BAC-755FAECEA98F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C9A1CEE-1FDA-42F2-8BAC-755FAECEA98F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C9A1CEE-1FDA-42F2-8BAC-755FAECEA98F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C9A1CEE-1FDA-42F2-8BAC-755FAECEA98F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BF765BB-4B46-4D04-A5A6-F8D2C0323F31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BF765BB-4B46-4D04-A5A6-F8D2C0323F31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BF765BB-4B46-4D04-A5A6-F8D2C0323F31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BF765BB-4B46-4D04-A5A6-F8D2C0323F31}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5C9D6ECE-8385-4C13-8FDC-313B33DA06FB} = {C4955A6F-31A1-43F6-A64A-51AA94B8C802}
+		{A79FE505-49DB-43A6-BDDA-B6EF9027A632} = {C4955A6F-31A1-43F6-A64A-51AA94B8C802}
+		{6C9A1CEE-1FDA-42F2-8BAC-755FAECEA98F} = {C4955A6F-31A1-43F6-A64A-51AA94B8C802}
+		{9BF765BB-4B46-4D04-A5A6-F8D2C0323F31} = {C4955A6F-31A1-43F6-A64A-51AA94B8C802}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1CA74A87-8295-40EC-9914-3CF1102D4C19}
+	EndGlobalSection
+EndGlobal
