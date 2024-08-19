@@ -11,6 +11,6 @@ public class ProductController : ControllerBase
     public async Task<IActionResult> Post(
     [FromServices] HttpClient http)
     {
-
+        return Ok();
     }
 }

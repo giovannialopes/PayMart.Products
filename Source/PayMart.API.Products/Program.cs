@@ -1,5 +1,5 @@
-using PayMart.Infrastructure.Products.Migrations;
 using PayMart.Infrastructure.Products.Injection;
+using PayMart.Infrastructure.Products.Migrations;
 
 var builder = WebApplication.CreateBuilder(args);
 
