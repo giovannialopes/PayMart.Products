@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PayMart.Application.Products.UseCases.Product;
+using PayMart.Domain.Products.Request.Product;
 
 namespace PayMart.API.Products.Controllers;
 
@@ -9,8 +11,10 @@ public class ProductController : ControllerBase
     [HttpPost]
     [Route("post")]
     public async Task<IActionResult> Post(
-    [FromServices] HttpClient http)
+    [FromServices] IPostProductUseCases useCases,
+    [FromBody] RequestProduct request)
     {
-        return Ok();
+        var response = await useCases.Execute(request);
+        return Ok(response);
     }
 }

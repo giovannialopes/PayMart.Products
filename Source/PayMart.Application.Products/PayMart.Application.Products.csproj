@@ -6,4 +6,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PayMart.Domain.Products\PayMart.Domain.Products.csproj" />
+    <ProjectReference Include="..\PayMart.Infrastructure.Products\PayMart.Infrastructure.Products.csproj" />
+  </ItemGroup>
+
 </Project>
