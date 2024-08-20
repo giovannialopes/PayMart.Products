@@ -4,7 +4,7 @@ using PayMart.Domain.Products.Interface.Products.Post;
 using PayMart.Domain.Products.Request.Product;
 using PayMart.Domain.Products.Response.Product;
 
-namespace PayMart.Application.Products.UseCases.Product;
+namespace PayMart.Application.Products.UseCases.Product.Post;
 
 public class PostProductUseCases : IPostProductUseCases
 {

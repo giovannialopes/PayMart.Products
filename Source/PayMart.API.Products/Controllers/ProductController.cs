@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PayMart.Application.Products.UseCases.Product;
+using PayMart.Application.Products.UseCases.Product.GetAll;
+using PayMart.Application.Products.UseCases.Product.Post;
 using PayMart.Domain.Products.Request.Product;
 
 namespace PayMart.API.Products.Controllers;
@@ -8,6 +9,15 @@ namespace PayMart.API.Products.Controllers;
 [ApiController]
 public class ProductController : ControllerBase
 {
+    [HttpGet]
+    [Route("getAll")]
+    public async Task<IActionResult> GetAll(
+    [FromServices] IGetAllProductUseCases useCases)
+    {
+        var response = await useCases.Execute();
+        return Ok(response);
+    }
+
     [HttpPost]
     [Route("post")]
     public async Task<IActionResult> Post(
