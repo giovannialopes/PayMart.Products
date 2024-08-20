@@ -58,7 +58,7 @@ public class ProductController : ControllerBase
     [FromRoute] int id,
     [FromServices] IDeleteProductUseCases useCases)
     {
-        var response = await useCases.Execute(id);
-        return Ok(response);
+        await useCases.Execute(id);
+        return Ok();
     }
 }
