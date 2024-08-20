@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PayMart.Application.Products.UseCases.Product.GetAll;
+using PayMart.Application.Products.UseCases.Product.GetID;
 using PayMart.Application.Products.UseCases.Product.Post;
 using PayMart.Domain.Products.Request.Product;
 
@@ -15,6 +16,16 @@ public class ProductController : ControllerBase
     [FromServices] IGetAllProductUseCases useCases)
     {
         var response = await useCases.Execute();
+        return Ok(response);
+    }
+
+    [HttpGet]
+    [Route("getID/{id}")]
+    public async Task<IActionResult> GetID(
+    [FromRoute] int id,
+    [FromServices] IGetIDProductUseCases useCases)
+    {
+        var response = await useCases.Execute(id);
         return Ok(response);
     }
 

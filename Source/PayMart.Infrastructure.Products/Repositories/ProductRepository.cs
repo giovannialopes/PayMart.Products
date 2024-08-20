@@ -2,7 +2,9 @@
 using PayMart.Domain.Products.Entities;
 using PayMart.Domain.Products.Interface.Database;
 using PayMart.Domain.Products.Interface.Products.GetAll;
+using PayMart.Domain.Products.Interface.Products.IGetID;
 using PayMart.Domain.Products.Interface.Products.Post;
+using PayMart.Domain.Products.Response.Product;
 using PayMart.Infrastructure.Products.DataAcess;
 
 namespace PayMart.Infrastructure.Products.Repositories;
@@ -10,7 +12,8 @@ namespace PayMart.Infrastructure.Products.Repositories;
 public class ProductRepository :
     ICommit,
     IPost,
-    IGetAll
+    IGetAll,
+    IGetID
 {
     private readonly DbProduct _dbProduct;
 
@@ -23,5 +26,7 @@ public class ProductRepository :
 
     public async Task Add(Product product) => await _dbProduct.Tb_Product.AddAsync(product);
     public async Task<List<Product>> GetAll() => await _dbProduct.Tb_Product.AsNoTracking().ToListAsync();
+
+    public async Task<Product?> GetID(int id) => await _dbProduct.Tb_Product.AsNoTracking().FirstOrDefaultAsync(config => config.ID == id);
 
 }
