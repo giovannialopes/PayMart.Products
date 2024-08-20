@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PayMart.Application.Products.UseCases.Product.Delete;
 using PayMart.Application.Products.UseCases.Product.GetAll;
 using PayMart.Application.Products.UseCases.Product.GetID;
 using PayMart.Application.Products.UseCases.Product.Post;
@@ -51,5 +52,13 @@ public class ProductController : ControllerBase
         return Ok(response);
     }
 
-
+    [HttpDelete]
+    [Route("delete/{id}")]
+    public async Task<IActionResult> Delete(
+    [FromRoute] int id,
+    [FromServices] IDeleteProductUseCases useCases)
+    {
+        var response = await useCases.Execute(id);
+        return Ok(response);
+    }
 }

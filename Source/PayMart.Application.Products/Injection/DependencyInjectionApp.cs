@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using PayMart.Application.Products.AutoMapper;
+using PayMart.Application.Products.UseCases.Product.Delete;
 using PayMart.Application.Products.UseCases.Product.GetAll;
 using PayMart.Application.Products.UseCases.Product.GetID;
 using PayMart.Application.Products.UseCases.Product.Post;
@@ -26,5 +27,6 @@ public static class DependencyInjectionApp
         services.AddScoped<IGetAllProductUseCases, GetAllProductUseCases>();
         services.AddScoped<IGetIDProductUseCases, GetIDProductUseCases>();
         services.AddScoped<IUpdateProductUseCases, UpdateProductUseCases>();
+        services.AddScoped<IDeleteProductUseCases, DeleteProductUseCases>();
     }
 }

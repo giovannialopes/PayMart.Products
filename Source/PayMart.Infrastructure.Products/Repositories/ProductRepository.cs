@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PayMart.Domain.Products.Entities;
 using PayMart.Domain.Products.Interface.Database;
+using PayMart.Domain.Products.Interface.Products.Delete;
 using PayMart.Domain.Products.Interface.Products.GetAll;
 using PayMart.Domain.Products.Interface.Products.IGetID;
 using PayMart.Domain.Products.Interface.Products.Post;
@@ -14,7 +15,8 @@ public class ProductRepository :
     IPost,
     IGetAll,
     IGetID,
-    IUpdate
+    IUpdate,
+    IDelete
 {
     private readonly DbProduct _dbProduct;
 
@@ -26,8 +28,13 @@ public class ProductRepository :
 
     public async Task<List<Product>> GetAll() => await _dbProduct.Tb_Product.AsNoTracking().ToListAsync();
     public async Task<Product?> GetID(int id) => await _dbProduct.Tb_Product.AsNoTracking().FirstOrDefaultAsync(config => config.ID == id);
-    public async Task<Product?> GetIDUpdate(int id) => await _dbProduct.Tb_Product.AsNoTracking().FirstOrDefaultAsync(config => config.ID == id);
 
     public void Update(Product product) => _dbProduct.Tb_Product.Update(product);
+
+    public async Task Delete(int id)
+    {
+        var result = await _dbProduct.Tb_Product.AsNoTracking().FirstOrDefaultAsync(config => config.ID == id);
+        _dbProduct.Tb_Product.Remove(result!);
+    }
 
 }
