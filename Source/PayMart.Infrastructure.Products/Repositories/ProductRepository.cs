@@ -3,6 +3,7 @@ using PayMart.Domain.Products.Entities;
 using PayMart.Domain.Products.Interface.Database;
 using PayMart.Domain.Products.Interface.Products.Delete;
 using PayMart.Domain.Products.Interface.Products.GetAll;
+using PayMart.Domain.Products.Interface.Products.GetSum;
 using PayMart.Domain.Products.Interface.Products.IGetID;
 using PayMart.Domain.Products.Interface.Products.Post;
 using PayMart.Domain.Products.Interface.Products.Update;
@@ -16,7 +17,8 @@ public class ProductRepository :
     IGetAll,
     IGetID,
     IUpdate,
-    IDelete
+    IDelete,
+    IGetSum
 {
     private readonly DbProduct _dbProduct;
 
@@ -36,5 +38,8 @@ public class ProductRepository :
         var result = await _dbProduct.Tb_Product.AsNoTracking().FirstOrDefaultAsync(config => config.Id == id);
         _dbProduct.Tb_Product.Remove(result!);
     }
+
+    public async Task<List<Product>> GetSum(int id) => await _dbProduct.Tb_Product.AsNoTracking().Where(config => config.ProductID == id).ToListAsync();
+
 
 }

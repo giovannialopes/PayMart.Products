@@ -3,6 +3,7 @@ using PayMart.Application.Products.AutoMapper;
 using PayMart.Application.Products.UseCases.Product.Delete;
 using PayMart.Application.Products.UseCases.Product.GetAll;
 using PayMart.Application.Products.UseCases.Product.GetID;
+using PayMart.Application.Products.UseCases.Product.GetSum;
 using PayMart.Application.Products.UseCases.Product.Post;
 using PayMart.Application.Products.UseCases.Product.Update;
 
@@ -28,5 +29,6 @@ public static class DependencyInjectionApp
         services.AddScoped<IGetIDProductUseCases, GetIDProductUseCases>();
         services.AddScoped<IUpdateProductUseCases, UpdateProductUseCases>();
         services.AddScoped<IDeleteProductUseCases, DeleteProductUseCases>();
+        services.AddScoped<IGetSumProductUseCases, GetSumProductUseCases>();
     }
 }

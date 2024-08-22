@@ -2,6 +2,7 @@
 using PayMart.Application.Products.UseCases.Product.Delete;
 using PayMart.Application.Products.UseCases.Product.GetAll;
 using PayMart.Application.Products.UseCases.Product.GetID;
+using PayMart.Application.Products.UseCases.Product.GetSum;
 using PayMart.Application.Products.UseCases.Product.Post;
 using PayMart.Application.Products.UseCases.Product.Update;
 using PayMart.Application.Products.Utilities;
@@ -33,6 +34,26 @@ public class ProductController : ControllerBase
         return Ok(response);
     }
 
+    [HttpGet]
+    [Route("restartProduct")]
+    public IActionResult RestartProduct()
+    {
+        SaveProductID.SaveProductId(0);
+
+        return Ok();
+    }
+
+
+    [HttpGet]
+    [Route("getSumProducts/{productID}")]
+    public async Task<IActionResult> GetSumProducts(
+    [FromRoute] int productID,
+    [FromServices] IGetSumProductUseCases useCases)
+    {
+        var response = await useCases.Execute(productID);
+        return Ok(response);
+    }
+
     [HttpPost]
     [Route("post/{userID}")]
     public async Task<IActionResult> Post(
@@ -55,14 +76,6 @@ public class ProductController : ControllerBase
         return Ok(response);
     }
 
-    [HttpGet]
-    [Route("RestartProduct")]
-    public IActionResult RestartProduct()
-    {
-        SaveProductID.SaveProductId(0);
-
-        return Ok();
-    }
 
     [HttpPut]
     [Route("update/{id}/{userID}")]

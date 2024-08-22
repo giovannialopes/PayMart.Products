@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using PayMart.Domain.Products.Interface.Database;
 using PayMart.Domain.Products.Interface.Products.Delete;
 using PayMart.Domain.Products.Interface.Products.GetAll;
+using PayMart.Domain.Products.Interface.Products.GetSum;
 using PayMart.Domain.Products.Interface.Products.IGetID;
 using PayMart.Domain.Products.Interface.Products.Post;
 using PayMart.Domain.Products.Interface.Products.Update;
@@ -27,6 +28,7 @@ public static class DepedencyInjectionInfra
         services.AddScoped<IGetID, ProductRepository>();
         services.AddScoped<IUpdate, ProductRepository>();
         services.AddScoped<IDelete, ProductRepository>();
+        services.AddScoped<IGetSum, ProductRepository>();
     }
 
     public static void AddDbContext(IServiceCollection services, IConfiguration configuration)
