@@ -32,22 +32,25 @@ public class ProductController : ControllerBase
     }
 
     [HttpPost]
-    [Route("post")]
+    [Route("post/{userID}")]
     public async Task<IActionResult> Post(
         [FromServices] IPostProductUseCases useCases,
-        [FromBody] RequestProduct request)
+        [FromBody] RequestProduct request,
+        [FromRoute] int userID)
     {
+        request.UserID = userID;
         var response = await useCases.Execute(request);
         return Ok(response);
     }
 
     [HttpPut]
-    [Route("update/{id}")]
+    [Route("update/{id}/{userID}")]
     public async Task<IActionResult> Update(
-        [FromRoute] int id,
+        [FromRoute] int id, int userID,
         [FromServices] IUpdateProductUseCases useCases,
         [FromBody] RequestProduct request)
     {
+        request.UserID = userID;
         var response = await useCases.Execute(request, id);
         return Ok(response);
     }
