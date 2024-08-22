@@ -4,7 +4,9 @@ using PayMart.Application.Products.UseCases.Product.GetAll;
 using PayMart.Application.Products.UseCases.Product.GetID;
 using PayMart.Application.Products.UseCases.Product.Post;
 using PayMart.Application.Products.UseCases.Product.Update;
+using PayMart.Application.Products.Utilities;
 using PayMart.Domain.Products.Request.Product;
+using PayMart.Infrastructure.Products.Migrations;
 
 namespace PayMart.API.Products.Controllers;
 
@@ -38,9 +40,28 @@ public class ProductController : ControllerBase
         [FromBody] RequestProduct request,
         [FromRoute] int userID)
     {
+
+        var productId = SaveProductID.GetProductId();
+
+        if (productId == 0)
+        {
+            productId = NumberGenerator.Generate();
+            SaveProductID.SaveProductId(productId);
+        }
+
         request.UserID = userID;
+        request.ProductID = productId;
         var response = await useCases.Execute(request);
         return Ok(response);
+    }
+
+    [HttpGet]
+    [Route("RestartProduct")]
+    public IActionResult RestartProduct()
+    {
+        SaveProductID.SaveProductId(0);
+
+        return Ok();
     }
 
     [HttpPut]

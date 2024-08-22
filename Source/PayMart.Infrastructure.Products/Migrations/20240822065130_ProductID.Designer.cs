@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PayMart.Infrastructure.Products.DataAcess;
 
@@ -10,9 +11,11 @@ using PayMart.Infrastructure.Products.DataAcess;
 namespace PayMart.Infrastructure.Products.Migrations
 {
     [DbContext(typeof(DbProduct))]
-    partial class DbProductModelSnapshot : ModelSnapshot
+    [Migration("20240822065130_ProductID")]
+    partial class ProductID
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

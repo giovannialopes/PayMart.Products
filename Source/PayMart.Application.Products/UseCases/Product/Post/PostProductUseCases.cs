@@ -25,6 +25,7 @@ public class PostProductUseCases : IPostProductUseCases
     {
         var Client = _mapper.Map<Domain.Products.Entities.Product>(request);
 
+
         await _post.Add(Client);
 
         await _commit.Commit();
