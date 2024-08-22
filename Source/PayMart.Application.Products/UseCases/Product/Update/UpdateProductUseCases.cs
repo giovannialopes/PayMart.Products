@@ -30,7 +30,7 @@ public class UpdateProductUseCases : IUpdateProductUseCases
     {
         var GetID = await _getID.GetID(id);
 
-        var product = _mapper.Map(request,GetID);
+        var product = _mapper.Map(request, GetID);
 
         _update.Update(product);
 

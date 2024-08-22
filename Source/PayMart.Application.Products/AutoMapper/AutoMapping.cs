@@ -16,7 +16,11 @@ public class AutoMapping : Profile
 
     private void RequestToEntity()
     {
-        CreateMap<RequestProduct, Product>();
+        CreateMap<RequestProduct, Product>()
+            .ForMember(dest => dest.UserID, opt => opt.Ignore())
+            .ForMember(dest => dest.ProductID, opt => opt.Ignore());
+
+
     }
 
     private void EntityToResponse()

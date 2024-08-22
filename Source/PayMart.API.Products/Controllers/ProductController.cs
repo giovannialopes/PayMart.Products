@@ -43,7 +43,6 @@ public class ProductController : ControllerBase
         return Ok();
     }
 
-
     [HttpGet]
     [Route("getSumProducts/{productID}")]
     public async Task<IActionResult> GetSumProducts(
@@ -75,7 +74,6 @@ public class ProductController : ControllerBase
         var response = await useCases.Execute(request);
         return Ok(response);
     }
-
 
     [HttpPut]
     [Route("update/{id}/{userID}")]
