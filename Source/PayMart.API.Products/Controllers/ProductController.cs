@@ -60,7 +60,6 @@ public class ProductController : ControllerBase
         [FromBody] RequestProduct request,
         [FromRoute] int userID)
     {
-
         var productId = SaveProductID.GetProductId();
 
         if (productId == 0)
@@ -80,7 +79,7 @@ public class ProductController : ControllerBase
     public async Task<IActionResult> Update(
         [FromRoute] int id, int userID,
         [FromServices] IUpdateProductUseCases useCases,
-        [FromBody] RequestProduct request)
+        [FromBody] RequestProductUpdate request)
     {
         request.UserID = userID;
         var response = await useCases.Execute(request, id);

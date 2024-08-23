@@ -4,5 +4,5 @@ namespace PayMart.Domain.Products.Interface.Products.Post;
 
 public interface IPost
 {
-    Task Add(Product product);
+    Task Add(ProductEnt product);
 }

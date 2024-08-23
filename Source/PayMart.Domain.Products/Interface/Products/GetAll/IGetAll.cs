@@ -4,5 +4,5 @@ namespace PayMart.Domain.Products.Interface.Products.GetAll;
 
 public interface IGetAll
 {
-    Task<List<Product>> GetAll();
+    Task<List<ProductEnt>> GetAll();
 }

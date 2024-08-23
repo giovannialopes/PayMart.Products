@@ -3,6 +3,7 @@ using PayMart.Domain.Products.Interface.Database;
 using PayMart.Domain.Products.Interface.Products.Post;
 using PayMart.Domain.Products.Request.Product;
 using PayMart.Domain.Products.Response.Product;
+using PayMart.Domain.Products.Entities;
 
 namespace PayMart.Application.Products.UseCases.Product.Post;
 
@@ -23,8 +24,7 @@ public class PostProductUseCases : IPostProductUseCases
 
     public async Task<ResponseProduct> Execute(RequestProduct request)
     {
-        var Client = _mapper.Map<Domain.Products.Entities.Product>(request);
-
+        var Client = _mapper.Map<ProductEnt>(request);
 
         await _post.Add(Client);
 

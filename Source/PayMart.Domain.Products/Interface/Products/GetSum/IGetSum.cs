@@ -4,5 +4,5 @@ namespace PayMart.Domain.Products.Interface.Products.GetSum;
 
 public interface IGetSum
 {
-    Task<List<Product>> GetSum(int id);
+    Task<List<ProductEnt>> GetSum(int id);
 }

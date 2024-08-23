@@ -5,5 +5,5 @@ namespace PayMart.Application.Products.UseCases.Product.Update;
 
 public interface IUpdateProductUseCases
 {
-    Task<ResponseProduct> Execute(RequestProduct request, int id);
+    Task<ResponseProduct> Execute(RequestProductUpdate request, int id);
 }

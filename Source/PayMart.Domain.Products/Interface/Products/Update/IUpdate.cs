@@ -4,5 +4,5 @@ namespace PayMart.Domain.Products.Interface.Products.Update;
 
 public interface IUpdate
 {
-    void Update(Product product);
+    void Update(ProductEnt product);
 }

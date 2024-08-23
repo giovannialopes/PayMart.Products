@@ -26,7 +26,7 @@ public class UpdateProductUseCases : IUpdateProductUseCases
         _mapper = mapper;
     }
 
-    public async Task<ResponseProduct> Execute(RequestProduct request, int id)
+    public async Task<ResponseProduct> Execute(RequestProductUpdate request, int id)
     {
         var GetID = await _getID.GetID(id);
 

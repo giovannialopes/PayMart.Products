@@ -26,12 +26,12 @@ public class ProductRepository :
 
     public async Task Commit() => await _dbProduct.SaveChangesAsync();
 
-    public async Task Add(Product product) => await _dbProduct.Tb_Product.AddAsync(product);
+    public async Task Add(ProductEnt product) => await _dbProduct.Tb_Product.AddAsync(product);
 
-    public async Task<List<Product>> GetAll() => await _dbProduct.Tb_Product.AsNoTracking().ToListAsync();
-    public async Task<Product?> GetID(int id) => await _dbProduct.Tb_Product.AsNoTracking().FirstOrDefaultAsync(config => config.Id == id);
+    public async Task<List<ProductEnt>> GetAll() => await _dbProduct.Tb_Product.AsNoTracking().ToListAsync();
+    public async Task<ProductEnt?> GetID(int id) => await _dbProduct.Tb_Product.AsNoTracking().FirstOrDefaultAsync(config => config.Id == id);
 
-    public void Update(Product product) => _dbProduct.Tb_Product.Update(product);
+    public void Update(ProductEnt product) => _dbProduct.Tb_Product.Update(product);
 
     public async Task Delete(int id)
     {
@@ -39,7 +39,7 @@ public class ProductRepository :
         _dbProduct.Tb_Product.Remove(result!);
     }
 
-    public async Task<List<Product>> GetSum(int id) => await _dbProduct.Tb_Product.AsNoTracking().Where(config => config.ProductID == id).ToListAsync();
+    public async Task<List<ProductEnt>> GetSum(int id) => await _dbProduct.Tb_Product.AsNoTracking().Where(config => config.ProductID == id).ToListAsync();
 
 
 }
