@@ -1,31 +1,32 @@
 ﻿using AutoMapper;
-using PayMart.Domain.Products.Interface.Database;
-using PayMart.Domain.Products.Interface.Products.Delete;
-using PayMart.Domain.Products.Interface.Products.IGetID;
-using PayMart.Domain.Products.Interface.Products.Update;
-using PayMart.Domain.Products.Response.Product;
+using PayMart.Domain.Products.Interface.Repositories;
 
 namespace PayMart.Application.Products.UseCases.Product.Delete;
 
 public class DeleteProductUseCases : IDeleteProductUseCases
 {
-    private readonly IDelete _delete;
-    private readonly ICommit _commit;
+    private readonly IProductRepository _productRepository;
     private readonly IMapper _mapper;
 
-    public DeleteProductUseCases(IDelete delete,
-        ICommit commit,
+    public DeleteProductUseCases(IProductRepository productRepository,
         IMapper mapper)
     {
-        _delete = delete;
-        _commit = commit;
+        _productRepository = productRepository;
         _mapper = mapper;
     }
 
-    public async Task Execute(int id)
+    public async Task<string> Execute(int id)
     {
-        await _delete.Delete(id);
+        var verifyProduct = await _productRepository.GetProductByID(id);
 
-        await _commit.Commit();
+        if (verifyProduct != null)
+        {
+            _productRepository.DeleteProduct(verifyProduct);
+            await _productRepository.Commit();
+
+            return "Ok";
+        }
+        return "";
+
     }
 }

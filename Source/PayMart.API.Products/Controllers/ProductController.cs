@@ -21,6 +21,9 @@ public class ProductController : ControllerBase
         [FromServices] IGetAllProductUseCases useCases)
     {
         var response = await useCases.Execute();
+        if (response == null)
+            return Ok("");
+
         return Ok(response);
     }
 
@@ -31,6 +34,9 @@ public class ProductController : ControllerBase
         [FromServices] IGetIDProductUseCases useCases)
     {
         var response = await useCases.Execute(id);
+        if (response == null)
+            return Ok("");
+
         return Ok(response);
     }
 
@@ -50,6 +56,9 @@ public class ProductController : ControllerBase
     [FromServices] IGetSumProductUseCases useCases)
     {
         var response = await useCases.Execute(productID);
+        if (response == 0)
+            return Ok("");
+
         return Ok(response);
     }
 
@@ -60,17 +69,12 @@ public class ProductController : ControllerBase
         [FromBody] RequestProduct request,
         [FromRoute] int userID)
     {
-        var productId = SaveProductID.GetProductId();
-
-        if (productId == 0)
-        {
-            productId = NumberGenerator.Generate();
-            SaveProductID.SaveProductId(productId);
-        }
-
         request.UserID = userID;
-        request.ProductID = productId;
+        request.ProductID = ProductIdGenerator.ReturnID();
         var response = await useCases.Execute(request);
+        if (response == null)
+            return Ok("");
+
         return Ok(response);
     }
 
@@ -83,6 +87,9 @@ public class ProductController : ControllerBase
     {
         request.UserID = userID;
         var response = await useCases.Execute(request, id);
+        if (response == null)
+            return Ok("");
+
         return Ok(response);
     }
 
@@ -92,7 +99,10 @@ public class ProductController : ControllerBase
     [FromRoute] int id,
     [FromServices] IDeleteProductUseCases useCases)
     {
-        await useCases.Execute(id);
-        return Ok();
+        var response = await useCases.Execute(id);
+        if (response == null)
+            return Ok("");
+
+        return Ok(response);
     }
 }

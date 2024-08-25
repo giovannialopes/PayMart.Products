@@ -1,24 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PayMart.Domain.Products.Entities;
-using PayMart.Domain.Products.Interface.Database;
-using PayMart.Domain.Products.Interface.Products.Delete;
-using PayMart.Domain.Products.Interface.Products.GetAll;
-using PayMart.Domain.Products.Interface.Products.GetSum;
-using PayMart.Domain.Products.Interface.Products.IGetID;
-using PayMart.Domain.Products.Interface.Products.Post;
-using PayMart.Domain.Products.Interface.Products.Update;
+using PayMart.Domain.Products.Interface.Repositories;
 using PayMart.Infrastructure.Products.DataAcess;
 
 namespace PayMart.Infrastructure.Products.Repositories;
 
-public class ProductRepository :
-    ICommit,
-    IPost,
-    IGetAll,
-    IGetID,
-    IUpdate,
-    IDelete,
-    IGetSum
+public class ProductRepository : IProductRepository
+
 {
     private readonly DbProduct _dbProduct;
 
@@ -26,20 +14,22 @@ public class ProductRepository :
 
     public async Task Commit() => await _dbProduct.SaveChangesAsync();
 
-    public async Task Add(ProductEnt product) => await _dbProduct.Tb_Product.AddAsync(product);
 
-    public async Task<List<ProductEnt>> GetAll() => await _dbProduct.Tb_Product.AsNoTracking().ToListAsync();
-    public async Task<ProductEnt?> GetID(int id) => await _dbProduct.Tb_Product.AsNoTracking().FirstOrDefaultAsync(config => config.Id == id);
+    public async Task<List<ProductEnt>> GetProduct() => await _dbProduct.Tb_Product.AsNoTracking().ToListAsync();
 
-    public void Update(ProductEnt product) => _dbProduct.Tb_Product.Update(product);
+    public async Task<bool?> VerifyProduct(int productId) => await _dbProduct.Tb_Product.AsNoTracking().AnyAsync(config => config.ProductID == productId);
 
-    public async Task Delete(int id)
-    {
-        var result = await _dbProduct.Tb_Product.AsNoTracking().FirstOrDefaultAsync(config => config.Id == id);
-        _dbProduct.Tb_Product.Remove(result!);
-    }
+    public async Task<ProductEnt?> GetProductByID(int id) => await _dbProduct.Tb_Product.AsNoTracking().FirstOrDefaultAsync(config => config.Id == id);
 
-    public async Task<List<ProductEnt>> GetSum(int id) => await _dbProduct.Tb_Product.AsNoTracking().Where(config => config.ProductID == id).ToListAsync();
+    public async Task<List<ProductEnt>> GetSumPrices(int id) => await _dbProduct.Tb_Product.AsNoTracking().Where(config => config.ProductID == id).ToListAsync();
+
+
+
+    public void AddProduct(ProductEnt product) => _dbProduct.Tb_Product.AddAsync(product);
+
+    public void UpdateProduct(ProductEnt product) => _dbProduct.Tb_Product.Update(product);
+
+    public void DeleteProduct(ProductEnt product) => _dbProduct.Tb_Product.Remove(product);
 
 
 }

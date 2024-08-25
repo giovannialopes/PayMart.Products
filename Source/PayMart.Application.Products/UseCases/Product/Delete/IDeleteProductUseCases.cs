@@ -3,5 +3,5 @@
 namespace PayMart.Application.Products.UseCases.Product.Delete;
 
 public interface IDeleteProductUseCases
-{    Task Execute(int id); 
+{    Task<string> Execute(int id); 
 }

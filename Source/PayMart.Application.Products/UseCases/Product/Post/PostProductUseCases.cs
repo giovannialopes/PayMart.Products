@@ -1,35 +1,38 @@
 ﻿using AutoMapper;
-using PayMart.Domain.Products.Interface.Database;
-using PayMart.Domain.Products.Interface.Products.Post;
+using PayMart.Domain.Products.Entities;
+using PayMart.Domain.Products.Interface.Repositories;
 using PayMart.Domain.Products.Request.Product;
 using PayMart.Domain.Products.Response.Product;
-using PayMart.Domain.Products.Entities;
 
 namespace PayMart.Application.Products.UseCases.Product.Post;
 
 public class PostProductUseCases : IPostProductUseCases
 {
-    private readonly IPost _post;
-    private readonly ICommit _commit;
+    private readonly IProductRepository _productRepository;
     private readonly IMapper _mapper;
 
-    public PostProductUseCases(IPost post,
-        ICommit commit,
+    public PostProductUseCases(IProductRepository productRepository,
         IMapper mapper)
     {
-        _post = post;
-        _commit = commit;
+        _productRepository = productRepository;
         _mapper = mapper;
     }
 
     public async Task<ResponseProduct> Execute(RequestProduct request)
     {
-        var Client = _mapper.Map<ProductEnt>(request);
+        var verifyProduct = await _productRepository.VerifyProduct(request.ProductID);
 
-        await _post.Add(Client);
+        if (verifyProduct == false)
+        {
+            var Product = _mapper.Map<ProductEnt>(request);
 
-        await _commit.Commit();
+            _productRepository.AddProduct(Product);
 
-        return _mapper.Map<ResponseProduct>(Client);
+            await _productRepository.Commit();
+
+            return _mapper.Map<ResponseProduct>(Product);
+        }
+
+        return null;
     }
 }
