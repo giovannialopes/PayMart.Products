@@ -15,21 +15,19 @@ public class ProductRepository : IProductRepository
     public async Task Commit() => await _dbProduct.SaveChangesAsync();
 
 
-    public async Task<List<ProductEnt>> GetProduct() => await _dbProduct.Tb_Product.AsNoTracking().ToListAsync();
+    public async Task<List<Product>> GetProduct() => await _dbProduct.Tb_Product.AsNoTracking().ToListAsync();
 
-    public async Task<bool?> VerifyProduct(int productId) => await _dbProduct.Tb_Product.AsNoTracking().AnyAsync(config => config.ProductID == productId);
+    public async Task<Product?> GetProductByID(int id) => await _dbProduct.Tb_Product.AsNoTracking().FirstOrDefaultAsync(config => config.Id == id);
 
-    public async Task<ProductEnt?> GetProductByID(int id) => await _dbProduct.Tb_Product.AsNoTracking().FirstOrDefaultAsync(config => config.Id == id);
-
-    public async Task<List<ProductEnt>> GetSumPrices(int id) => await _dbProduct.Tb_Product.AsNoTracking().Where(config => config.ProductID == id).ToListAsync();
+    public async Task<List<Product>> GetSumPrices(int id) => await _dbProduct.Tb_Product.AsNoTracking().Where(config => config.ProductId == id).ToListAsync();
 
 
 
-    public void AddProduct(ProductEnt product) => _dbProduct.Tb_Product.AddAsync(product);
+    public void AddProduct(Product product) => _dbProduct.Tb_Product.AddAsync(product);
 
-    public void UpdateProduct(ProductEnt product) => _dbProduct.Tb_Product.Update(product);
+    public void UpdateProduct(Product product) => _dbProduct.Tb_Product.Update(product);
 
-    public void DeleteProduct(ProductEnt product) => _dbProduct.Tb_Product.Remove(product);
+    public void DeleteProduct(Product product) => _dbProduct.Tb_Product.Remove(product);
 
 
 }

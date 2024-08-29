@@ -1,13 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PayMart.Application.Products.UseCases.Product.Delete;
-using PayMart.Application.Products.UseCases.Product.GetAll;
-using PayMart.Application.Products.UseCases.Product.GetID;
-using PayMart.Application.Products.UseCases.Product.GetSum;
-using PayMart.Application.Products.UseCases.Product.Post;
-using PayMart.Application.Products.UseCases.Product.Update;
-using PayMart.Application.Products.Utilities;
-using PayMart.Domain.Products.Request.Product;
-using PayMart.Infrastructure.Products.Migrations;
+using PayMart.Domain.Products.Services.Product.Delete;
+using PayMart.Domain.Products.Services.Product.GetAll;
+using PayMart.Domain.Products.Services.Product.GetID;
+using PayMart.Domain.Products.Services.Product.GetSum;
+using PayMart.Domain.Products.Services.Product.Post;
+using PayMart.Domain.Products.Services.Product.Update;
+using PayMart.Domain.Products.Utilities;
+using PayMart.Domain.Products.Model;
 
 namespace PayMart.API.Products.Controllers;
 
@@ -17,10 +16,10 @@ public class ProductController : ControllerBase
 {
     [HttpGet]
     [Route("getAll")]
-    public async Task<IActionResult> GetAll(
-        [FromServices] IGetAllProductUseCases useCases)
+    public async Task<IActionResult> GetAllProduct(
+        [FromServices] IGetAllProduct services)
     {
-        var response = await useCases.Execute();
+        var response = await services.Execute();
         if (response == null)
             return Ok("");
 
@@ -29,11 +28,11 @@ public class ProductController : ControllerBase
 
     [HttpGet]
     [Route("getID/{id}")]
-    public async Task<IActionResult> GetID(
+    public async Task<IActionResult> GetProductByID(
         [FromRoute] int id,
-        [FromServices] IGetIDProductUseCases useCases)
+        [FromServices] IGetProductByID services)
     {
-        var response = await useCases.Execute(id);
+        var response = await services.Execute(id);
         if (response == null)
             return Ok("");
 
@@ -53,9 +52,9 @@ public class ProductController : ControllerBase
     [Route("getSumProducts/{productID}")]
     public async Task<IActionResult> GetSumProducts(
     [FromRoute] int productID,
-    [FromServices] IGetSumProductUseCases useCases)
+    [FromServices] IGetSumProduct services)
     {
-        var response = await useCases.Execute(productID);
+        var response = await services.Execute(productID);
         if (response == 0)
             return Ok("");
 
@@ -64,14 +63,14 @@ public class ProductController : ControllerBase
 
     [HttpPost]
     [Route("post/{userID}")]
-    public async Task<IActionResult> Post(
-        [FromServices] IPostProductUseCases useCases,
-        [FromBody] RequestProduct request,
+    public async Task<IActionResult> RegisterProduct(
+        [FromServices] IRegisterProduct services,
+        [FromBody] ModelProduct.CreateProductRequest request,
         [FromRoute] int userID)
     {
-        request.UserID = userID;
-        request.ProductID = ProductIdGenerator.ReturnID();
-        var response = await useCases.Execute(request);
+        request.UserId = userID;
+        request.ProductId = ProductIdGenerator.ReturnID();
+        var response = await services.Execute(request);
         if (response == null)
             return Ok("");
 
@@ -80,13 +79,13 @@ public class ProductController : ControllerBase
 
     [HttpPut]
     [Route("update/{id}/{userID}")]
-    public async Task<IActionResult> Update(
+    public async Task<IActionResult> UpdateProduct(
         [FromRoute] int id, int userID,
-        [FromServices] IUpdateProductUseCases useCases,
-        [FromBody] RequestProductUpdate request)
+        [FromServices] IUpdateProduct services,
+        [FromBody] ModelProduct.UpdateProductRequest request)
     {
-        request.UserID = userID;
-        var response = await useCases.Execute(request, id);
+        request.UserId = userID;
+        var response = await services.Execute(request, id);
         if (response == null)
             return Ok("");
 
@@ -95,11 +94,11 @@ public class ProductController : ControllerBase
 
     [HttpDelete]
     [Route("delete/{id}")]
-    public async Task<IActionResult> Delete(
+    public async Task<IActionResult> DeleteProduct(
     [FromRoute] int id,
-    [FromServices] IDeleteProductUseCases useCases)
+    [FromServices] IDeleteProduct services)
     {
-        var response = await useCases.Execute(id);
+        var response = await services.Execute(id);
         if (response == null)
             return Ok("");
 

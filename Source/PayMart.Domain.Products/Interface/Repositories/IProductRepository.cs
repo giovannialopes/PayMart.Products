@@ -6,14 +6,13 @@ namespace PayMart.Domain.Products.Interface.Repositories;
 public interface IProductRepository : ICommit
 {
 
-    public Task<List<ProductEnt>> GetProduct();
-    public Task<ProductEnt?> GetProductByID(int id);
-    public Task<bool?> VerifyProduct(int productId);
-    public Task<List<ProductEnt>> GetSumPrices(int id);
+    public Task<List<Product>> GetProduct();
+    public Task<Product?> GetProductByID(int id);
+    public Task<List<Product>> GetSumPrices(int id);
 
-    public void UpdateProduct(ProductEnt product);
-    public void AddProduct(ProductEnt product);
-    public void DeleteProduct(ProductEnt product);
+    public void UpdateProduct(Product product);
+    public void AddProduct(Product product);
+    public void DeleteProduct(Product product);
 
 
 }
