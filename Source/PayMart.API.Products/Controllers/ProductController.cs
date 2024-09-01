@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PayMart.Domain.Products.Exceptions;
 using PayMart.Domain.Products.Model;
 using PayMart.Domain.Products.Services;
 
@@ -15,7 +16,7 @@ public class ProductController : ControllerBase
     {
         var response = await services.GetProducts();
         if (response == null)
-            return Ok("");
+            return Ok(ResourceExceptions.ERRO_PRODUTO_NAO_ENCONTRADO);
 
         return Ok(response);
     }
@@ -28,7 +29,7 @@ public class ProductController : ControllerBase
     {
         var response = await services.GetProductById(id);
         if (response == null)
-            return Ok("");
+            return Ok(ResourceExceptions.ERRO_PRODUTO_NAO_ENCONTRADO);
 
         return Ok(response);
     }
@@ -45,7 +46,7 @@ public class ProductController : ControllerBase
 
         var response = await services.CreateProduct(request);
         if (response == null)
-            return Ok("");
+            return Ok(ResourceExceptions.ERRO_DADOS_INVALIDOS);
 
         return Ok(response);
     }
@@ -61,7 +62,7 @@ public class ProductController : ControllerBase
         request.UserId = userID;
         var response = await services.UpdateProduct(request, id);
         if (response == null)
-            return Ok("");
+            return Ok(ResourceExceptions.ERRO_DADOS_INVALIDOS);
 
         return Ok(response);
     }
@@ -74,7 +75,7 @@ public class ProductController : ControllerBase
     {
         var response = await services.DeleteProduct(id);
         if (response == null)
-            return Ok("");
+            return Ok(ResourceExceptions.ERRO_PRODUTO_NAO_ENCONTRADO);
 
         return Ok(response);
     }

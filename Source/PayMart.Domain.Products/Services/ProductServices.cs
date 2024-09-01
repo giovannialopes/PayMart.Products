@@ -25,7 +25,11 @@ public class ProductServices(IProductRepository productRepository,
     {
         var Product = await productRepository.GetProductByID(id);
 
-        return mapper.Map<ModelProduct.ProductResponse>(Product);
+        if (Product != null)
+            return mapper.Map<ModelProduct.ProductResponse>(Product);
+
+        return default;
+
     }
 
     public async Task<ModelProduct.ProductResponse?> CreateProduct(ModelProduct.CreateProductRequest request)
@@ -68,7 +72,7 @@ public class ProductServices(IProductRepository productRepository,
             productRepository.DeleteProduct(verifyProduct);
             await productRepository.Commit();
 
-            return "Ok";
+            return "Deleted";
         }
         return default;
     }
