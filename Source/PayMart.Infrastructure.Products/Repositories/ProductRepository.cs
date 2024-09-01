@@ -15,11 +15,11 @@ public class ProductRepository : IProductRepository
     public async Task Commit() => await _dbProduct.SaveChangesAsync();
 
 
-    public async Task<List<Product>> GetProduct() => await _dbProduct.Tb_Product.AsNoTracking().ToListAsync();
+    public async Task<List<Product>> GetProduct() => await _dbProduct.Tb_Product.AsNoTracking().Where(config => config.DeleteBy == 0).ToListAsync();
 
-    public async Task<Product?> GetProductByID(int id) => await _dbProduct.Tb_Product.AsNoTracking().FirstOrDefaultAsync(config => config.Id == id);
+    public async Task<Product?> GetProductByID(int id) => await _dbProduct.Tb_Product.AsNoTracking().FirstOrDefaultAsync(config => config.Id == id && config.DeleteBy == 0);
 
-    public async Task<List<Product>> GetSumPrices(int id) => await _dbProduct.Tb_Product.AsNoTracking().Where(config => config.ProductId == id).ToListAsync();
+    public async Task<List<Product>> GetSumPrices(int id) => await _dbProduct.Tb_Product.AsNoTracking().Where(config => config.UserId == id).ToListAsync();
 
 
 

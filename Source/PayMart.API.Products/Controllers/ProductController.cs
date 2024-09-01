@@ -1,12 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PayMart.Domain.Products.Services.Product.Delete;
-using PayMart.Domain.Products.Services.Product.GetAll;
-using PayMart.Domain.Products.Services.Product.GetID;
-using PayMart.Domain.Products.Services.Product.GetSum;
-using PayMart.Domain.Products.Services.Product.Post;
-using PayMart.Domain.Products.Services.Product.Update;
-using PayMart.Domain.Products.Utilities;
 using PayMart.Domain.Products.Model;
+using PayMart.Domain.Products.Services;
 
 namespace PayMart.API.Products.Controllers;
 
@@ -17,9 +11,9 @@ public class ProductController : ControllerBase
     [HttpGet]
     [Route("getAll")]
     public async Task<IActionResult> GetAllProduct(
-        [FromServices] IGetAllProduct services)
+        [FromServices] IProductServices services)
     {
-        var response = await services.Execute();
+        var response = await services.GetProducts();
         if (response == null)
             return Ok("");
 
@@ -29,33 +23,11 @@ public class ProductController : ControllerBase
     [HttpGet]
     [Route("getID/{id}")]
     public async Task<IActionResult> GetProductByID(
-        [FromRoute] int id,
-        [FromServices] IGetProductByID services)
+        [FromServices] IProductServices services,
+        [FromRoute] int id)
     {
-        var response = await services.Execute(id);
+        var response = await services.GetProductById(id);
         if (response == null)
-            return Ok("");
-
-        return Ok(response);
-    }
-
-    [HttpGet]
-    [Route("restartProduct")]
-    public IActionResult RestartProduct()
-    {
-        SaveProductID.SaveProductId(0);
-
-        return Ok();
-    }
-
-    [HttpGet]
-    [Route("getSumProducts/{productID}")]
-    public async Task<IActionResult> GetSumProducts(
-    [FromRoute] int productID,
-    [FromServices] IGetSumProduct services)
-    {
-        var response = await services.Execute(productID);
-        if (response == 0)
             return Ok("");
 
         return Ok(response);
@@ -64,13 +36,13 @@ public class ProductController : ControllerBase
     [HttpPost]
     [Route("post/{userID}")]
     public async Task<IActionResult> RegisterProduct(
-        [FromServices] IRegisterProduct services,
+        [FromServices] IProductServices services,
         [FromBody] ModelProduct.CreateProductRequest request,
         [FromRoute] int userID)
     {
         request.UserId = userID;
-        request.ProductId = ProductIdGenerator.ReturnID();
-        var response = await services.Execute(request);
+
+        var response = await services.CreateProduct(request);
         if (response == null)
             return Ok("");
 
@@ -80,12 +52,13 @@ public class ProductController : ControllerBase
     [HttpPut]
     [Route("update/{id}/{userID}")]
     public async Task<IActionResult> UpdateProduct(
-        [FromRoute] int id, int userID,
-        [FromServices] IUpdateProduct services,
+        [FromServices] IProductServices services,
+        [FromRoute] int id,
+        [FromRoute] int userID,
         [FromBody] ModelProduct.UpdateProductRequest request)
     {
         request.UserId = userID;
-        var response = await services.Execute(request, id);
+        var response = await services.UpdateProduct(request, id);
         if (response == null)
             return Ok("");
 
@@ -95,10 +68,10 @@ public class ProductController : ControllerBase
     [HttpDelete]
     [Route("delete/{id}")]
     public async Task<IActionResult> DeleteProduct(
-    [FromRoute] int id,
-    [FromServices] IDeleteProduct services)
+        [FromServices] IProductServices services,
+        [FromRoute] int id)
     {
-        var response = await services.Execute(id);
+        var response = await services.DeleteProduct(id);
         if (response == null)
             return Ok("");
 

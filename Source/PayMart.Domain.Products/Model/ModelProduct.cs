@@ -17,6 +17,7 @@ public class ModelProduct
 
         [JsonIgnore]
         public int ProductId { get; set; }
+
     }
 
     public class UpdateProductRequest
@@ -25,7 +26,12 @@ public class ModelProduct
         public string Description { get; set; } = string.Empty;
         public int StockQuantity { get; set; }
         public decimal Price { get; set; }
+
+        [JsonIgnore]
         public int UserId { get; set; }
+
+        [JsonIgnore]
+        public int ProductId { get; set; }
     }
 
     public class ProductResponse
@@ -35,8 +41,8 @@ public class ModelProduct
         public string Description { get; set; } = string.Empty;
         public int StockQuantity { get; set; }
         public decimal Price { get; set; }
+        public string Status { get; set; } = string.Empty;
         public int UserId { get; set; }
-        public ProductStatus Status { get; set; }
     }
 
     public class ListProductResponse
