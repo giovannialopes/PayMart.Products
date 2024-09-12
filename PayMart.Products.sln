@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35122.118
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{C4955A6F-31A1-43F6-A64A-51AA94B8C802}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C4955A6F-31A1-43F6-A64A-51AA94B8C802}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayMart.API.Products", "Source\PayMart.API.Products\PayMart.API.Products.csproj", "{5C9D6ECE-8385-4C13-8FDC-313B33DA06FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayMart.API.Products", "src\PayMart.API.Products\PayMart.API.Products.csproj", "{5C9D6ECE-8385-4C13-8FDC-313B33DA06FB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayMart.Domain.Products", "Source\PayMart.Domain.Products\PayMart.Domain.Products.csproj", "{A79FE505-49DB-43A6-BDDA-B6EF9027A632}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayMart.Domain.Products", "src\PayMart.Domain.Products\PayMart.Domain.Products.csproj", "{A79FE505-49DB-43A6-BDDA-B6EF9027A632}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayMart.Infrastructure.Products", "Source\PayMart.Infrastructure.Products\PayMart.Infrastructure.Products.csproj", "{9BF765BB-4B46-4D04-A5A6-F8D2C0323F31}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayMart.Infrastructure.Products", "src\PayMart.Infrastructure.Products\PayMart.Infrastructure.Products.csproj", "{9BF765BB-4B46-4D04-A5A6-F8D2C0323F31}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
